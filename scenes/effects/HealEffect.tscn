@@ -1,0 +1,104 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8qjgvyqnxr4t"]
+
+[ext_resource type="Script" path="res://scripts/effects/HealEffect.gd" id="1_yvnqm"]
+
+[sub_resource type="Gradient" id="Gradient_lfxs8"]
+offsets = PackedFloat32Array(0, 0.3, 0.7, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.2, 1, 0.4, 1, 0.1, 0.8, 0.3, 0.7, 0, 0.6, 0.2, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yvr2p"]
+gradient = SubResource("Gradient_lfxs8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uxgvd"]
+emission_shape = 1
+emission_sphere_radius = 10.0
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 90.0
+gravity = Vector3(0, -50, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+orbital_velocity_min = 0.0
+orbital_velocity_max = 0.0
+damping_min = 5.0
+damping_max = 10.0
+angle_max = 360.0
+scale_min = 1.0
+scale_max = 3.0
+color_ramp = SubResource("GradientTexture1D_yvr2p")
+
+[sub_resource type="Animation" id="Animation_uxgvd"]
+resource_name = "play"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Particles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Circle:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.5),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(1.2, 1.2), Vector2(2, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Circle:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.2, 1, 0.4, 0.8), Color(0.2, 1, 0.4, 0.5), Color(0.2, 1, 0.4, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uxgvd"]
+_data = {
+"play": SubResource("Animation_uxgvd")
+}
+
+[node name="HealEffect" type="Node2D"]
+script = ExtResource("1_yvnqm")
+
+[node name="Circle" type="ColorRect" parent="."]
+modulate = Color(0.2, 1, 0.4, 0.8)
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+scale = Vector2(0.1, 0.1)
+pivot_offset = Vector2(50, 50)
+color = Color(1, 1, 1, 0.5)
+
+[node name="Particles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_uxgvd")
+lifetime = 1.0
+one_shot = true
+explosiveness = 0.3
+randomness = 0.2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"default": SubResource("AnimationLibrary_uxgvd")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -10.0
+pitch_scale = 1.0

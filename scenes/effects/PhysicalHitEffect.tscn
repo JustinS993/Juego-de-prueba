@@ -1,0 +1,109 @@
+[gd_scene load_steps=7 format=3 uid="uid://bqnxqbsm8p5yd"]
+
+[ext_resource type="Script" path="res://scripts/effects/PhysicalHitEffect.gd" id="1_yvnqm"]
+
+[sub_resource type="Gradient" id="Gradient_lfxs8"]
+offsets = PackedFloat32Array(0, 0.3, 0.7, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.8, 0.2, 1, 1, 0.5, 0.1, 0.7, 1, 0.3, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yvr2p"]
+gradient = SubResource("Gradient_lfxs8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uxgvd"]
+emission_shape = 1
+emission_sphere_radius = 5.0
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 60.0
+gravity = Vector3(0, 98, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+orbital_velocity_min = 0.0
+orbital_velocity_max = 0.0
+damping_min = 20.0
+damping_max = 50.0
+angle_max = 360.0
+scale_min = 0.5
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_yvr2p")
+
+[sub_resource type="Animation" id="Animation_uxgvd"]
+resource_name = "play"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
+"transitions": PackedFloat32Array(0.5, 2, 1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(1.2, 1.2), Vector2(0.8, 0.8), Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
+"transitions": PackedFloat32Array(0.5, 2, 1, 1),
+"update": 0,
+"values": [0.0, -15.0, 15.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Particles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uxgvd"]
+_data = {
+"play": SubResource("Animation_uxgvd")
+}
+
+[node name="PhysicalHitEffect" type="Node2D"]
+script = ExtResource("1_yvnqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(0.1, 0.1)
+
+[node name="Particles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_uxgvd")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"default": SubResource("AnimationLibrary_uxgvd")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -10.0
+pitch_scale = 1.2

@@ -1,0 +1,281 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scripts/QuestUI.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/main_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/title_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/ui/panel_background.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/button_normal.png" type="Texture" id=5]
+[ext_resource path="res://assets/ui/button_pressed.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/button_hover.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/scroll_background.png" type="Texture" id=8]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 512, 512 )
+margin_left = 20.0
+margin_right = 20.0
+margin_top = 20.0
+margin_bottom = 20.0
+
+[node name="QuestUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainPanel" type="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -500.0
+margin_top = -300.0
+margin_right = 500.0
+margin_bottom = 300.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLabel" type="Label"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -200.0
+margin_top = 20.0
+margin_right = 200.0
+margin_bottom = 60.0
+custom_fonts/font = ExtResource( 3 )
+text = "MISIONES"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SortOptions" type="OptionButton"]
+margin_left = 30.0
+margin_top = 70.0
+margin_right = 230.0
+margin_bottom = 100.0
+custom_fonts/font = ExtResource( 2 )
+text = "Ordenar por: Tipo"
+items = [ "Ordenar por: Tipo", null, false, 0, null, "Ordenar por: Estado", null, false, 1, null, "Ordenar por: Nivel", null, false, 2, null, "Ordenar por: Alfabético", null, false, 3, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestList" type="Tree"]
+margin_left = 30.0
+margin_top = 110.0
+margin_right = 330.0
+margin_bottom = 550.0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/bg = SubResource( 1 )
+columns = 1
+hide_root = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestDetails" type="VBoxContainer"]
+margin_left = 350.0
+margin_top = 70.0
+margin_right = 970.0
+margin_bottom = 550.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestTitle" type="Label"]
+margin_right = 620.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_fonts/font = ExtResource( 3 )
+text = "Título de la Misión"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator"]
+margin_top = 44.0
+margin_right = 620.0
+margin_bottom = 48.0
+
+[node name="QuestType" type="Label"]
+margin_top = 52.0
+margin_right = 620.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 2 )
+text = "Tipo: Principal"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestStatus" type="Label"]
+margin_top = 76.0
+margin_right = 620.0
+margin_bottom = 96.0
+custom_fonts/font = ExtResource( 2 )
+text = "Estado: Activa"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestLocation" type="Label"]
+margin_top = 100.0
+margin_right = 620.0
+margin_bottom = 120.0
+custom_fonts/font = ExtResource( 2 )
+text = "Ubicación: Ruinas de Drossal"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator2" type="HSeparator"]
+margin_top = 124.0
+margin_right = 620.0
+margin_bottom = 128.0
+
+[node name="QuestDescription" type="Label"]
+margin_top = 132.0
+margin_right = 620.0
+margin_bottom = 182.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 2 )
+text = "Descripción de la misión que explica los detalles y el contexto de la misma."
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator3" type="HSeparator"]
+margin_top = 186.0
+margin_right = 620.0
+margin_bottom = 190.0
+
+[node name="Objectives" type="VBoxContainer"]
+margin_top = 194.0
+margin_right = 620.0
+margin_bottom = 334.0
+rect_min_size = Vector2( 0, 140 )
+
+[node name="ObjectivesTitle" type="Label"]
+margin_right = 620.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 2 )
+text = "Objetivos:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ObjectivesList" type="Tree"]
+margin_top = 24.0
+margin_right = 620.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 0, 116 )
+custom_fonts/font = ExtResource( 2 )
+custom_styles/bg = SubResource( 1 )
+columns = 1
+hide_root = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator4" type="HSeparator"]
+margin_top = 338.0
+margin_right = 620.0
+margin_bottom = 342.0
+
+[node name="Rewards" type="VBoxContainer"]
+margin_top = 346.0
+margin_right = 620.0
+margin_bottom = 446.0
+rect_min_size = Vector2( 0, 100 )
+
+[node name="RewardsTitle" type="Label"]
+margin_right = 620.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 2 )
+text = "Recompensas:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RewardsList" type="Tree"]
+margin_top = 24.0
+margin_right = 620.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 76 )
+custom_fonts/font = ExtResource( 2 )
+custom_styles/bg = SubResource( 1 )
+columns = 1
+hide_root = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TrackButton" type="TextureButton"]
+margin_top = 450.0
+margin_right = 200.0
+margin_bottom = 480.0
+rect_min_size = Vector2( 200, 30 )
+size_flags_horizontal = 0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 2 )
+text = "Seguir misión"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="TextureButton"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -50.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = 50.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 2 )
+text = "X"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="item_selected" from="MainPanel/QuestList" to="." method="_on_quest_list_item_selected"]
+[connection signal="item_selected" from="MainPanel/QuestDetails/Objectives/ObjectivesList" to="." method="_on_objective_item_selected"]

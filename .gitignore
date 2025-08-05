@@ -1,0 +1,38 @@
+# Godot-specific ignores
+.import/
+export.cfg
+export_presets.cfg
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+
+# System/tool-specific ignores
+.DS_Store
+.directory
+*~
+
+# Unity-specific ignores (en caso de migración)
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+
+# VS Code directories
+.vscode/
+
+# Visual Studio cache directory
+.vs/
+
+# Rider cache directory
+.idea/
+
+# Binary files
+*.pck
+*.exe

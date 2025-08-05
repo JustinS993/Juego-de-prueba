@@ -1,0 +1,201 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/EventUI.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/main_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/title_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/ui/panel_background.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/ui/button_normal.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/ui/button_hover.tres" type="StyleBox" id=6]
+
+[node name="EventUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainPanel" type="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -500.0
+margin_top = -300.0
+margin_right = 500.0
+margin_bottom = 300.0
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -200.0
+margin_top = 20.0
+margin_right = 200.0
+margin_bottom = 60.0
+custom_fonts/font = ExtResource( 3 )
+text = "EVENTOS"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EventList" type="ItemList"]
+margin_left = 30.0
+margin_top = 70.0
+margin_right = 330.0
+margin_bottom = 550.0
+custom_fonts/font = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NoEventsLabel" type="Label"]
+margin_left = 30.0
+margin_top = 300.0
+margin_right = 330.0
+margin_bottom = 320.0
+custom_fonts/font = ExtResource( 2 )
+text = "No hay eventos disponibles"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EventDetailsPanel" type="Panel"]
+margin_left = 350.0
+margin_top = 70.0
+margin_right = 970.0
+margin_bottom = 550.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 600.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 3 )
+text = "Título del Evento"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EventIcon" type="TextureRect"]
+margin_left = 20.0
+margin_top = 60.0
+margin_right = 84.0
+margin_bottom = 124.0
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TypeLabel" type="Label"]
+margin_left = 100.0
+margin_top = 60.0
+margin_right = 600.0
+margin_bottom = 80.0
+custom_fonts/font = ExtResource( 2 )
+text = "Tipo: Historia"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatusLabel" type="Label"]
+margin_left = 100.0
+margin_top = 90.0
+margin_right = 600.0
+margin_bottom = 110.0
+custom_fonts/font = ExtResource( 2 )
+text = "Estado: Activo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Location" type="Label"]
+margin_left = 100.0
+margin_top = 120.0
+margin_right = 600.0
+margin_bottom = 140.0
+custom_fonts/font = ExtResource( 2 )
+text = "Ubicación: Ruinas de Drossal"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DescriptionTitle" type="Label"]
+margin_left = 20.0
+margin_top = 160.0
+margin_right = 600.0
+margin_bottom = 180.0
+custom_fonts/font = ExtResource( 2 )
+text = "Descripción:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="RichTextLabel"]
+margin_left = 20.0
+margin_top = 190.0
+margin_right = 600.0
+margin_bottom = 350.0
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "Descripción detallada del evento que puede incluir múltiples líneas de texto y posiblemente formato BBCode para resaltar elementos importantes."
+text = "Descripción detallada del evento que puede incluir múltiples líneas de texto y posiblemente formato BBCode para resaltar elementos importantes."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChoicesTitle" type="Label"]
+margin_left = 20.0
+margin_top = 360.0
+margin_right = 600.0
+margin_bottom = 380.0
+custom_fonts/font = ExtResource( 2 )
+text = "Opciones:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChoicesContainer" type="VBoxContainer"]
+margin_left = 20.0
+margin_top = 390.0
+margin_right = 600.0
+margin_bottom = 470.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="Button"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -100.0
+margin_top = -60.0
+margin_right = 100.0
+margin_bottom = -20.0
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 5 )
+custom_fonts/font = ExtResource( 2 )
+text = "Cerrar"
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,0 +1,209 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6yvgx8p4yjnv"]
+
+[ext_resource type="Script" path="res://scripts/SkillTreeUI.gd" id="1_ykr2p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8r2d"]
+bg_color = Color(0.12, 0.12, 0.12, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0.8)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k9r3d"]
+bg_color = Color(0.18, 0.18, 0.18, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.7, 0.7, 0.7, 0.8)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="SkillTreeScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_ykr2p")
+
+[node name="Background" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.05, 0.05, 0.9)
+
+[node name="HeaderContainer" type="HBoxContainer"]
+anchor_right = 1.0
+offset_bottom = 50.0
+
+[node name="TitleLabel" type="Label"]
+offset_right = 200.0
+offset_bottom = 50.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Árbol de Habilidades"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkillPointsLabel" type="Label"]
+offset_left = 204.0
+offset_right = 404.0
+offset_bottom = 50.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Puntos de Habilidad: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button"]
+offset_left = 408.0
+offset_right = 480.0
+offset_bottom = 50.0
+text = "Cerrar"
+
+[node name="SkillTreeTabs" type="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 60.0
+offset_bottom = -10.0
+
+[node name="Combate" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Tecnología" type="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Mutación" type="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="DescriptionPanel" type="Panel"]
+anchor_left = 0.7
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 60.0
+offset_bottom = -10.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_j8r2d")
+
+[node name="VBoxContainer" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+
+[node name="SkillNameLabel" type="Label"]
+offset_right = 124.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 18
+text = "Nombre de Habilidad"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator"]
+offset_top = 30.0
+offset_right = 124.0
+offset_bottom = 34.0
+
+[node name="SkillTypeLabel" type="Label"]
+offset_top = 38.0
+offset_right = 124.0
+offset_bottom = 61.0
+text = "Tipo: Pasiva"
+
+[node name="SkillLevelLabel" type="Label"]
+offset_top = 65.0
+offset_right = 124.0
+offset_bottom = 88.0
+text = "Nivel: 1/3"
+
+[node name="HSeparator2" type="HSeparator"]
+offset_top = 92.0
+offset_right = 124.0
+offset_bottom = 96.0
+
+[node name="DescriptionLabel" type="Label"]
+offset_top = 100.0
+offset_right = 124.0
+offset_bottom = 149.0
+text = "Descripción de la habilidad que explica lo que hace y cómo funciona."
+wrap_mode = 1
+
+[node name="HSeparator3" type="HSeparator"]
+offset_top = 153.0
+offset_right = 124.0
+offset_bottom = 157.0
+
+[node name="EffectsContainer" type="VBoxContainer"]
+offset_top = 161.0
+offset_right = 124.0
+offset_bottom = 161.0
+
+[node name="HSeparator4" type="HSeparator"]
+offset_top = 165.0
+offset_right = 124.0
+offset_bottom = 169.0
+
+[node name="RequirementsLabel" type="Label"]
+offset_top = 173.0
+offset_right = 124.0
+offset_bottom = 222.0
+text = "Requisitos: Ninguno"
+wrap_mode = 1
+
+[node name="HSeparator5" type="HSeparator"]
+offset_top = 226.0
+offset_right = 124.0
+offset_bottom = 230.0
+
+[node name="ButtonsContainer" type="HBoxContainer"]
+offset_top = 234.0
+offset_right = 124.0
+offset_bottom = 265.0
+alignment = 1
+
+[node name="UnlockButton" type="Button"]
+offset_left = 10.0
+offset_right = 114.0
+offset_bottom = 31.0
+size_flags_horizontal = 3
+text = "Desbloquear"
+
+[node name="UpgradeButton" type="Button"]
+visible = false
+offset_left = 67.0
+offset_right = 124.0
+offset_bottom = 31.0
+size_flags_horizontal = 3
+text = "Mejorar"
+
+[node name="ResetSkillsButton" type="Button"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -75.0
+offset_top = -40.0
+offset_right = 75.0
+offset_bottom = -10.0
+text = "Reiniciar Habilidades"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -50.0
+offset_right = 150.0
+offset_bottom = 50.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_k9r3d")
+dialog_text = "¿Estás seguro de que quieres reiniciar todas tus habilidades? Recuperarás todos tus puntos de habilidad, pero perderás todas las habilidades desbloqueadas."

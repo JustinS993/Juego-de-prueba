@@ -1,0 +1,181 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8qjgvyqnxr4t"]
+
+[ext_resource type="Script" path="res://scripts/effects/ShockStatusEffect.gd" id="1_yvnqm"]
+
+[sub_resource type="Gradient" id="Gradient_lfxs8"]
+offsets = PackedFloat32Array(0, 0.3, 0.7, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.6, 0.6, 1.0, 0.8, 0.4, 0.4, 1.0, 0.5, 0.2, 0.2, 1.0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yvr2p"]
+gradient = SubResource("Gradient_lfxs8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uxgvd"]
+emission_shape = 1
+emission_sphere_radius = 20.0
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+orbital_velocity_min = 0.0
+orbital_velocity_max = 0.0
+damping_min = 5.0
+damping_max = 10.0
+angle_max = 360.0
+scale_min = 0.5
+scale_max = 1.5
+color_ramp = SubResource("GradientTexture1D_yvr2p")
+
+[sub_resource type="Animation" id="Animation_uxgvd"]
+resource_name = "play"
+length = 1.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Particles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lightning:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Lightning:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 30.0, 60.0, 90.0, 120.0, 150.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Light:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.5, 1.0, 0.5, 1.0, 0.5, 1.0, 0.5, 1.0, 0.5, 1.0, 0.5]
+}
+
+[sub_resource type="Animation" id="Animation_dmgpl"]
+resource_name = "damage_pulse"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Particles2D:amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [25, 50, 25]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Particles2D:process_material:initial_velocity_max")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [30.0, 60.0, 30.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [0.5, 2.0, 0.5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Lightning:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uxgvd"]
+_data = {
+"damage_pulse": SubResource("Animation_dmgpl"),
+"play": SubResource("Animation_uxgvd")
+}
+
+[node name="ShockStatusEffect" type="Node2D"]
+script = ExtResource("1_yvnqm")
+
+[node name="Lightning" type="Node2D" parent="."]
+
+[node name="Line1" type="Line2D" parent="Lightning"]
+points = PackedVector2Array(0, 0, -10, -15, 5, -25, -5, -40)
+width = 2.0
+default_color = Color(0.6, 0.6, 1, 0.8)
+
+[node name="Line2" type="Line2D" parent="Lightning"]
+points = PackedVector2Array(0, 0, 10, -10, -5, -20, 10, -30)
+width = 2.0
+default_color = Color(0.6, 0.6, 1, 0.8)
+
+[node name="Line3" type="Line2D" parent="Lightning"]
+points = PackedVector2Array(0, 0, -5, -5, 0, -15, -10, -20)
+width = 2.0
+default_color = Color(0.6, 0.6, 1, 0.8)
+
+[node name="Particles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_uxgvd")
+lifetime = 0.5
+randomness = 0.3
+
+[node name="Light" type="PointLight2D" parent="."]
+color = Color(0.6, 0.6, 1, 1)
+energy = 0.5
+shadow_enabled = true
+texture_scale = 0.3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"default": SubResource("AnimationLibrary_uxgvd")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -12.0
+pitch_scale = 1.2

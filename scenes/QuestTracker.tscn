@@ -1,0 +1,107 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/QuestTracker.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/main_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/ui/panel_background.png" type="Texture" id=3]
+[ext_resource path="res://assets/icons/quest_main.png" type="Texture" id=4]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 512, 512 )
+margin_left = 10.0
+margin_right = 10.0
+margin_top = 10.0
+margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.8, 0.8, 0.8, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.2, 0.2, 0.2, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="QuestTracker" type="Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -300.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = 120.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer"]
+margin_right = 260.0
+margin_bottom = 32.0
+
+[node name="QuestIcon" type="TextureRect"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestTitle" type="Label"]
+margin_left = 36.0
+margin_top = 6.0
+margin_right = 260.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Título de la Misión"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ObjectiveText" type="Label"]
+margin_top = 36.0
+margin_right = 260.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 2 )
+text = "Descripción del objetivo actual"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar"]
+margin_top = 60.0
+margin_right = 260.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 20 )
+custom_styles/fg = SubResource( 2 )
+value = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8qjy6c5xh3gv"]
+
+[ext_resource type="Script" path="res://scripts/ui/SkillButton.gd" id="1_0ykpj"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/skill_frame_passive.png" id="2_bnr4p"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/skill_icon_placeholder.png" id="3_iqkgv"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/skill_lock.png" id="4_yvmxs"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/skill_glow.png" id="5_yvmxs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8r2d"]
+fg_color = Color(0.94, 0.94, 0.94, 1)
+bg_color = Color(0.2, 0.2, 0.2, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0.8)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="SkillButton" type="TextureButton"]
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_0ykpj")
+
+[node name="GlowEffect" type="TextureRect"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("5_yvmxs")
+expand_mode = 1
+
+[node name="SkillFrame" type="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bnr4p")
+expand_mode = 1
+
+[node name="SkillIcon" type="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("3_iqkgv")
+expand_mode = 1
+
+[node name="LockIcon" type="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4_yvmxs")
+expand_mode = 1
+
+[node name="SkillNameLabel" type="Label"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = 4.0
+offset_right = 60.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "Nombre Habilidad"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="LevelIndicator" type="ProgressBar"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_j8r2d")
+max_value = 100.0
+value = 33.0
+show_percentage = false

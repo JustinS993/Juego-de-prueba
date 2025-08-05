@@ -1,0 +1,281 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scripts/CinematicUI.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/main_font.tres" type="DynamicFont" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "
+shader_type canvas_item;
+
+uniform float distortion_amount = 0.0;
+uniform float blur_amount = 0.0;
+uniform float aberration_amount = 0.0;
+
+void fragment() {
+    vec2 uv = SCREEN_UV;
+    vec2 center = vec2(0.5, 0.5);
+    vec2 offset = uv - center;
+    
+    // Distortion effect
+    float distortion = 1.0 + distortion_amount * length(offset);
+    vec2 distorted_uv = center + offset * distortion;
+    
+    // Chromatic aberration
+    vec4 r = texture(SCREEN_TEXTURE, distorted_uv + aberration_amount * vec2(0.01, 0.0));
+    vec4 g = texture(SCREEN_TEXTURE, distorted_uv);
+    vec4 b = texture(SCREEN_TEXTURE, distorted_uv - aberration_amount * vec2(0.01, 0.0));
+    
+    // Blur effect (simple box blur)
+    vec4 blur_color = vec4(0.0);
+    if (blur_amount > 0.0) {
+        float blur_step = blur_amount * 0.01;
+        for(float x = -2.0; x <= 2.0; x += 1.0) {
+            for(float y = -2.0; y <= 2.0; y += 1.0) {
+                blur_color += texture(SCREEN_TEXTURE, distorted_uv + vec2(x, y) * blur_step);
+            }
+        }
+        blur_color /= 25.0;
+    } else {
+        blur_color = g;
+    }
+    
+    // Combine effects
+    COLOR = vec4(r.r, g.g, b.b, 1.0);
+    COLOR = mix(COLOR, blur_color, min(blur_amount, 1.0));
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/distortion_amount = 0.0
+shader_param/blur_amount = 0.0
+shader_param/aberration_amount = 0.0
+
+[sub_resource type="Animation" id=3]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextPanel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Background:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("ChoicesPanel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("ChoicesPanel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextPanel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextPanel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Background:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="CinematicUI" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharacterContainer" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ParticleContainer" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextPanel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -400.0
+margin_top = -150.0
+margin_right = 400.0
+margin_bottom = -20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NarrationText" type="RichTextLabel" parent="TextPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "Texto de la cinemática..."
+text = "Texto de la cinemática..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChoicesPanel" type="Panel" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -300.0
+margin_top = -150.0
+margin_right = 300.0
+margin_bottom = 150.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="ChoicesPanel"]
+anchor_right = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 2 )
+text = "¿Qué harás?"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChoicesContainer" type="VBoxContainer" parent="ChoicesPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = 60.0
+margin_right = -40.0
+margin_bottom = -40.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CameraEffects" type="ColorRect" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/choices_appear = SubResource( 3 )
+anims/choices_disappear = SubResource( 4 )
+anims/fade_in = SubResource( 5 )
+anims/scene_appear = SubResource( 6 )
+anims/scene_disappear = SubResource( 7 )
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0

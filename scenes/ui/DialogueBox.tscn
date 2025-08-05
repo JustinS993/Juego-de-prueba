@@ -1,0 +1,142 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8yvwpvl4h5yw"]
+
+[ext_resource type="Script" path="res://scripts/DialogueText.gd" id="1_aqnxl"]
+[ext_resource type="Texture2D" path="res://assets/ui/dialogue_box.png" id="1_ixcvs"]
+[ext_resource type="FontFile" path="res://assets/fonts/main_font.ttf" id="2_lfxnj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yjnqw"]
+texture = ExtResource("1_ixcvs")
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 12.0
+margin_bottom = 12.0
+region_rect = Rect2(0, 0, 512, 128)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uxvgr"]
+bg_color = Color(0.2, 0.2, 0.2, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="DialogueBox" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 400.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Background" type="Panel" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_yjnqw")
+
+[node name="MarginContainer" type="MarginContainer" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" type="VBoxContainer"]
+layout_mode = 2
+
+[node name="TopRow" type="HBoxContainer" type="HBoxContainer"]
+layout_mode = 2
+
+[node name="NamePanel" type="Panel" type="Panel"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uxvgr")
+
+[node name="NameLabel" type="Label" type="Label"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_lfxnj")
+theme_override_font_sizes/font_size = 24
+text = "Nombre"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" type="Control"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MiddleRow" type="HBoxContainer" type="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PortraitContainer" type="Control" type="Control"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="Portrait" type="TextureRect" type="TextureRect"]
+layout_mode = 1
+offset_right = 150.0
+offset_bottom = 150.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextContainer" type="MarginContainer" type="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+
+[node name="DialogueText" type="RichTextLabel" type="RichTextLabel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("2_lfxnj")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "Texto de diálogo que aparecerá aquí..."
+script = ExtResource("1_aqnxl")
+
+[node name="DisplayTimer" type="Timer" type="Timer" parent="MarginContainer/VBoxContainer/MiddleRow/TextContainer/DialogueText"]
+one_shot = true
+
+[node name="ContinueTimer" type="Timer" type="Timer" parent="MarginContainer/VBoxContainer/MiddleRow/TextContainer/DialogueText"]
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/MiddleRow/TextContainer/DialogueText"]
+
+[node name="BottomRow" type="HBoxContainer" type="HBoxContainer"]
+layout_mode = 2
+
+[node name="ContinueIndicator" type="Label" type="Label"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("2_lfxnj")
+theme_override_font_sizes/font_size = 20
+text = "Presiona ESPACIO para continuar >"
+
+[node name="ChoicesContainer" type="VBoxContainer" type="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ChoiceButton1" type="Button" type="Button"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_lfxnj")
+theme_override_font_sizes/font_size = 18
+text = "Opción 1"
+alignment = 0
+
+[node name="ChoiceButton2" type="Button" type="Button"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_lfxnj")
+theme_override_font_sizes/font_size = 18
+text = "Opción 2"
+alignment = 0
+
+[node name="ChoiceButton3" type="Button" type="Button"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_lfxnj")
+theme_override_font_sizes/font_size = 18
+text = "Opción 3"
+alignment = 0
